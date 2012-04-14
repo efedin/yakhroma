@@ -3,12 +3,14 @@
 var ikData = [
 	{
 		"type": "УИКи",
-		"pict": "images/Red-chair32.png",
+		"pict": "images/number_{number}.png",
+		"shadow": "images/shadow.png",
 		"popupTpl": "<strong>УИК {number}</strong><br/>{obj}. {addr}, тел. {phone}"
 	},
 	{
 		"type": "ТИКи",
-		"pict": "images/Red-Couch32.png",
+		"pict": "images/symbol_sum.png",
+		"shadow": "images/shadow.png",
 		"popupTpl": "<strong>ТИК <a href='{url}'>{name}</a></strong><br/>{desc}"
 	}
 ];
@@ -33,7 +35,9 @@ var tpl = function(templ, obj) {
 var createMap = function() {
 	var map = getMapYaCentered(),
 		IkIcon = L.Icon.extend({
-			iconSize: new L.Point(32, 32)
+			iconSize: new L.Point(32, 37),
+			shadowSize: new L.Point(51, 37),
+			shadowUrl: "images/shadow.png"
 		}),
 		groupIcon,
 		markerPlace,
@@ -41,9 +45,9 @@ var createMap = function() {
 		arr;
 
 	for (var i = 0, len = ikData.length; i < len; i++) {
-		groupIcon = new IkIcon(ikData[i].pict);
 		arr = ikData[i].data;
 		for (var j = 0, leng = arr.length; j < leng; j++) {
+			groupIcon = new IkIcon(tpl(ikData[i].pict, arr[j]));
 			markerPlace = new L.LatLng(arr[j].lat, arr[j].lon);
 			marker = new L.Marker(markerPlace, {icon: groupIcon});
 			marker.bindPopup(tpl(ikData[i].popupTpl, arr[j]));
