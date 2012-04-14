@@ -46,9 +46,10 @@ var createMap = function() {
 			ikStyle.iconStyle.href = tpl(ikData[i].pict, arr[j]);
 			ikStyle.iconStyle.size = new YMaps.Size(32, 37);
 
-			ikStyle.shadow = new YMaps.IconShadowStyle();
-			ikStyle.shadow.href = "images/shadow.png";
-			ikStyle.shadow.size = new YMaps.Size(51, 37);
+			ikStyle.iconStyle.shadow = new YMaps.IconShadowStyle();
+			ikStyle.iconStyle.shadow.href = "images/shadow.png";
+			ikStyle.iconStyle.shadow.size = new YMaps.Size(51, 37);
+			ikStyle.iconStyle.shadow.offset = new YMaps.Point(-15, -30);
 
 			marker = new YMaps.Placemark(new YMaps.GeoPoint(arr[j].lon, arr[j].lat), {style: ikStyle});
 			marker.name = tpl(ikData[i].nameTpl, arr[j]);
