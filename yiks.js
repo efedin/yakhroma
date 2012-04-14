@@ -3,13 +3,15 @@
 var ikData = [
 	{
 		"type": "УИКи",
-		"pict": "images/Red-chair32.png",
+		"pict": "images/number_{number}.png",
+		"shadow": "images/shadow.png",
 		"popupTpl": "{obj}. {addr}, тел. {phone}",
 		"nameTpl": "УИК {number}"
 	},
 	{
 		"type": "ТИКи",
-		"pict": "images/Red-Couch32.png",
+		"pict": "images/symbol_sum.png",
+		"shadow": "images/shadow.png",
 		"popupTpl": "{desc}",
 		"nameTpl": "ТИК <a href='{url}'>{name}</a>"
 	}
@@ -17,8 +19,8 @@ var ikData = [
 
 var getMapYaCentered = function() {
 	var map = new YMaps.Map(document.getElementById("map"));
-	map.setCenter(new YMaps.GeoPoint(37.483333, 56.283333), 14);
-	map.addControl(new YMaps.TypeControl());
+	map.setCenter(new YMaps.GeoPoint(37.483333, 56.283333), 14, YMaps.MapType.PMAP);
+	map.addControl(new YMaps.TypeControl([YMaps.MapType.PMAP, YMaps.MapType.PHYBRID, YMaps.MapType.SATELLITE]));
 	map.addControl(new YMaps.ToolBar());
 	map.addControl(new YMaps.Zoom());
 	map.addControl(new YMaps.ScaleLine());
@@ -31,13 +33,24 @@ var tpl = function(templ, obj) {
 };
 var createMap = function() {
 	var map = getMapYaCentered(),
+		ikStyle,
 		marker,
 		arr;
 
 	for (var i = 0, len = ikData.length; i < len; i++) {
 		arr = ikData[i].data;
 		for (var j = 0, leng = arr.length; j < leng; j++) {
-			marker = new YMaps.Placemark(new YMaps.GeoPoint(arr[j].lon, arr[j].lat));
+			ikStyle = new YMaps.Style();
+
+			ikStyle.iconStyle = new YMaps.IconStyle();
+			ikStyle.iconStyle.href = tpl(ikData[i].pict, arr[j]);
+			ikStyle.iconStyle.size = new YMaps.Size(32, 37);
+
+			ikStyle.shadow = new YMaps.IconShadowStyle();
+			ikStyle.shadow.href = "images/shadow.png";
+			ikStyle.shadow.size = new YMaps.Size(51, 37);
+
+			marker = new YMaps.Placemark(new YMaps.GeoPoint(arr[j].lon, arr[j].lat), {style: ikStyle});
 			marker.name = tpl(ikData[i].nameTpl, arr[j]);
 			marker.description = tpl(ikData[i].popupTpl, arr[j]);
 			map.addOverlay(marker);

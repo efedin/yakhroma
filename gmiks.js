@@ -3,12 +3,14 @@
 var ikData = [
 	{
 		"type": "УИКи",
-		"pict": "images/Red-chair32.png",
+		"pict": "images/number_{number}.png",
+		"shadow": "images/shadow.png",
 		"popupTpl": "<strong>УИК {number}</strong><br/>{obj}. {addr}, тел. {phone}"
 	},
 	{
 		"type": "ТИКи",
-		"pict": "images/Red-Couch32.png",
+		"pict": "images/symbol_sum.png",
+		"shadow": "images/shadow.png",
 		"popupTpl": "<strong>ТИК <a href='{url}'>{name}</a></strong><br/>{desc}"
 	}
 ];
@@ -28,6 +30,8 @@ var tpl = function(templ, obj) {
 };
 var createMap = function() {
 	var map = getMapYaCentered(),
+		shadow = new google.maps.MarkerImage("images/shadow.png", new google.maps.Size(51, 37)),
+		ikIcon,
 		marker,
 		arr,
 		infoWindow;
@@ -38,6 +42,9 @@ var createMap = function() {
 			marker = new google.maps.Marker({
 				position: new google.maps.LatLng(arr[j].lat, arr[j].lon),
 				map: map,
+				shadow: shadow,
+				icon: new google.maps.MarkerImage(tpl(ikData[i].pict, arr[j]),
+					new google.maps.Size(32, 37)),
 				title: arr[j].number
 			});
 			(function(marker, html) {
