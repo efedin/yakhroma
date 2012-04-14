@@ -56,12 +56,12 @@ var createMap = function() {
 	}
 
 
-	var successGetLoc = function(position) {
+	/*var successGetLoc = function(position) {
 		map.setView(new L.LatLng(position.coords.latitude, position.coords.longitude), 15);
 	};
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(successGetLoc);
-	}
+	}*/
 };
 function getHTTPObject() {
 	if (typeof XMLHttpRequest != "undefined") {

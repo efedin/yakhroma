@@ -58,12 +58,12 @@ var createMap = function() {
 	}
 
 
-	var successGetLoc = function(position) {
+	/*var successGetLoc = function(position) {
 		map.setCenter(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
 	};
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(successGetLoc);
-	}
+	}*/
 };
 function getHTTPObject() {
 	if (typeof XMLHttpRequest != "undefined") {

@@ -59,12 +59,12 @@ var createMap = function() {
 	}
 
 
-	var successGetLoc = function(position) {
+	/*var successGetLoc = function(position) {
 		map.setCenter(new YMaps.GeoPoint(position.coords.longitude, position.coords.latitude), 15);
 	};
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(successGetLoc);
-	}
+	}*/
 };
 function getHTTPObject() {
 	if (typeof XMLHttpRequest != "undefined") {
