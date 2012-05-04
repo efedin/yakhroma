@@ -45,7 +45,7 @@ var createMap = function() {
 				shadow: shadow,
 				icon: new google.maps.MarkerImage(tpl(ikData[i].pict, arr[j]),
 					new google.maps.Size(32, 37)),
-				title: arr[j].number
+				title: '' + arr[j].number
 			});
 			(function(marker, html) {
 				infoWindow = new google.maps.InfoWindow();
